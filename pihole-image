@@ -1,0 +1,9 @@
+FROM pihole/pihole:latest
+WORKDIR /tmp
+RUN wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
+RUN sudo cp ./cloudflared-linux-arm64 /usr/local/bin/cloudflared
+RUN chmod +x /usr/local/bin/cloudflared
+RUN useradd -s /usr/sbin/nologin -r M cloudflared
+RUN echo "CLOUDFLARED_OPTS=--port 5053 --upstream https://1.1.1.1/dns-query --upstream https://1.0.0.1/dns-query" > /etc/default/cloudflared
+RUN chown cloudflared:cloudflared /etc/default/cloudflared
+RUN chown cloudflared:cloudflared /usr/local/bin/cloudflared
