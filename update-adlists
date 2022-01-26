@@ -1,0 +1,2 @@
+cat /etc/pihole/adlists.list.original > /etc/pihole/adlists.list
+curl https://v.firebog.net/hosts/lists.php?type=tick >> /etc/pihole/adlists.list
